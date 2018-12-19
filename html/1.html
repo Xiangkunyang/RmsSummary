@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1 user-scalable=0"/>
+    <title>2014-4-29</title>
+    <style>
+
+        .viewport{
+            width: 500%;
+            height: 100%;
+            display: -webkit-box;
+            overflow: hidden;
+            pointer-events: none;
+            -webkit-transform: translate3d(0,0,0);
+            backface-visibility: hidden;
+            position: relative;
+        }
+        .pageview{
+            width: 20%;
+            height: 100%;
+        }
+    </style>
+    <script src="../js/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+<div id="viewport" class="viewport">
+    <div class="pageview" style="background: #3b76c0" >
+        <h3 >页面-1</h3>
+    </div>
+    <div class="pageview" style="background: #58c03b;">
+        <h3>页面-2</h3>
+    </div>
+    <div class="pageview" style="background: #c03b25;">
+        <h3>页面-3</h3>
+    </div>
+    <div class="pageview" style="background: #e0a718;">
+        <h3>页面-4</h3>
+    </div>
+    <div class="pageview" style="background: #c03eac;">
+        <h3>页面-5</h3>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("body").on("touchstart", function (e) {
+            // 判断默认行为是否可以被禁用
+            if (e.cancelable) {
+                // 判断默认行为是否已经被禁用
+                if (!e.defaultPrevented) {
+                    e.preventDefault();
+                }
+            }
+            startX = e.originalEvent.changedTouches[0].pageX,
+                startY = e.originalEvent.changedTouches[0].pageY;
+        });
+        $("body").on("touchend", function (e) {
+            // 判断默认行为是否可以被禁用
+            if (e.cancelable) {
+                // 判断默认行为是否已经被禁用
+                if (!e.defaultPrevented) {
+                    e.preventDefault();
+                }
+            }
+            moveEndX = e.originalEvent.changedTouches[0].pageX,
+                moveEndY = e.originalEvent.changedTouches[0].pageY,
+                X = moveEndX - startX,
+                Y = moveEndY - startY;
+            //左滑
+            if (X > 0) {
+                alert('左滑');
+            }
+            //右滑
+            else if (X < 0) {
+                alert('右滑');
+            }
+            //下滑
+            else if (Y > 0) {
+                alert('下滑');
+            }
+            //上滑
+            else if (Y < 0) {
+                alert('上滑');
+            }
+            //单击
+            else {
+                alert('单击');
+            }
+        });
+    });
+</script>
+</body>
+
+</html>
