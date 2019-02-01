@@ -151,6 +151,65 @@
 </div>
 <div id="toolTip"></div>
 <script>
+		    var my_timestamp=document.getElementById('timestamp').innerText.trim();
+		    var my_nonceStr=document.getElementById('nonceStr').innerText.trim();
+		    var my_signature=document.getElementById('signature').innerText.trim();
+		    wx.config({
+		        debug: false,//判断是否为debug模式
+		        appId:'wxa64947f6b6549e88',
+		        timestamp:my_timestamp,
+		        nonceStr:""+my_nonceStr,
+		        signature:""+my_signature,
+		        jsApiList:[
+		            'checkJsApi',
+		            'onMenuShareTimeline',
+		            'onMenuShareAppMessage',
+		            'onMenuShareQQ',
+		            'onMenuShareWeibo'
+		        ]//开启的功能列表
+		    });
+		    var sharePerson = function(){
+		        wx.ready(function(){
+		            // 2.2 监听“分享到朋友圈”按钮点击、自定义分享内容及分享结果接口
+		            var mydata={
+				        imgurl:"http://tstatic.toptest.yidianzixun.com.ks3-cn-beijing.ksyun.com/public/files/share2001481696294315.jpg",
+				        img_width:'200',
+				        img_height:'200',
+				        url:'https://toptest.yidianzixun.com/2016/airchina/app.php',
+				        title:"国航祝您新春阖家团圆",
+				        desc:"中国国航邀您无论在哪里，和家人在一起就是团圆。"
+				      };
+		            wx.onMenuShareTimeline({
+		                title: mydata.title,
+		                link: mydata.url,
+		                imgUrl: mydata.imgurl,
+		                trigger: function (res) {
+		                    //alert('点击分享到朋友圈');
+		                }
+		            });
+		            //alert('已注册获取“分享到朋友圈”状态事件');
+		            wx.onMenuShareAppMessage({
+		                title: mydata.title,
+		                desc: mydata.desc,
+		                link:  mydata.url,
+		                imgUrl: mydata.imgurl,
+		                trigger: function (res) {
+		                    //alert('用户点击发送给朋友');
+		                }
+		            });
+		            wx.onMenuShareQQ({
+		                title: mydata.title,
+		                desc: mydata.desc,
+		                link: mydata.url,
+		                imgUrl: mydata.imgurl,
+		                trigger: function (res) {
+		                    //alert('用户点击分享到QQ');
+		                }
+		            });
+		        });
+		    };
+		 sharePerson();
+	
     var index = 1;
     var rmsDivLength = $(".rmsDiv").length;
     $(document).ready(function () {
